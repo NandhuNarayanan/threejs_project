@@ -26,10 +26,10 @@ export default function Sidebar() {
 
         {/* Nav Links */}
         <div className="hidden md:flex space-x-8 text-md font-semibold">
-          <a href="#" className="hover:text-[#E9A9B4] transition-colors">
+          <a href="#" className="hover:text-[#965863] text-[#6B4E5D] transition-colors">
             Upload
           </a>
-          <a href="#" className="hover:text-[#E9A9B4] transition-colors">
+          <a href="#" className="hover:text-[#965863] text-[#6B4E5D] transition-colors">
             Logs
           </a>
         </div>
