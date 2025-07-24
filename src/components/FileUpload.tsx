@@ -2,7 +2,15 @@
 
 import { useState, useRef } from "react";
 
-export default function FileUpload() {
+interface FileUploadProps {
+  setUploadStatus: (status: "idle" | "uploading" | "done") => void;
+  setUploadProgress?: (value: number) => void; // Optional if you add progress bar later
+}
+
+export default function FileUpload({
+  setUploadStatus,
+  setUploadProgress,
+}: FileUploadProps) {
   const [dragging, setDragging] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -12,7 +20,6 @@ export default function FileUpload() {
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setDragging(false);
-
     const file = e.dataTransfer.files?.[0];
     if (file) setSelectedFile(file);
   };
@@ -30,6 +37,7 @@ export default function FileUpload() {
 
     setUploading(true);
     setSuccess(false);
+    setUploadStatus("uploading");
 
     const res = await fetch("/api/upload", {
       method: "POST",
@@ -37,6 +45,7 @@ export default function FileUpload() {
     });
 
     setUploading(false);
+    setUploadStatus("done");
     setSuccess(res.ok);
   };
 
@@ -73,14 +82,16 @@ export default function FileUpload() {
         <button
           onClick={handleUpload}
           disabled={uploading}
-          className="bg-[#8E5D72] hover:bg-[#A97B90] text-white text-lg px-2 rounded-full shadow-md transition duration-300"
+          className="bg-[#8E5D72] hover:bg-[#A97B90] text-white text-lg px-4 py-2 rounded-full shadow-md transition duration-300"
         >
           {uploading ? "Uploading..." : "Upload File"}
         </button>
       )}
 
       {success && (
-        <p className="text-green-600 font-medium">✅ File uploaded successfully!</p>
+        <p className="text-green-600 font-medium">
+          ✅ File uploaded successfully!
+        </p>
       )}
     </div>
   );

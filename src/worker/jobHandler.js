@@ -12,14 +12,14 @@ async function handleLogFile(filePath) {
     .pipe(streamArray());
 
   console.log(`Processing file: ${filePath}`);
-  // const supabase = createClient(supabaseUrl, supabaseKey);
-  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL)
-  console.log(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
   jsonStream.on("data", async ({ value }) => {
     try {
-      let insertValue = await supabase.from("Log_stats").insert([value]).select();
-      console.log({insertValue});
+      let insertValue = await supabase
+        .from("Log_stats")
+        .insert([value])
+        .select();
+      // console.log({insertValue});
     } catch (err) {
       console.error("❌ Failed to insert object:", err);
     }
@@ -27,6 +27,13 @@ async function handleLogFile(filePath) {
 
   jsonStream.on("end", () => {
     console.log(`✅ Finished processing ${filePath}`);
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error(`❌ Failed to delete file: ${filePath}`, err);
+      } else {
+        console.log(`🧹 Deleted file: ${filePath}`);
+      }
+    });
   });
 
   jsonStream.on("error", (err) => {
