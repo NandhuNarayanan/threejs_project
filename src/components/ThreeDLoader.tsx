@@ -1,4 +1,3 @@
-// components/ThreeDLoader.tsx
 "use client";
 
 import { Canvas } from "@react-three/fiber";
@@ -25,7 +24,7 @@ function Model() {
 
 export default function ThreeDLoader() {
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen z-[9999] flex items-center justify-center pointer-events-none bg-transparent">
+    <div className="absolute top-0 right-0 w-screen h-screen z-[9999] flex items-center justify-center backdrop-blur-md bg-black/10 pointer-events-none">
       <Canvas
         camera={{ position: [0, 0, 5] }}
         gl={{ alpha: true }}
