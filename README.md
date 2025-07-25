@@ -98,9 +98,8 @@ npm run dev
 # In another terminal
 node worker/worker.ts
 📸 Demo Preview
-When the user uploads a file, a 3D cube splits and animates to show that the system is working in the background.
+<img width="1917" height="908" alt="image" src="https://github.com/user-attachments/assets/0ac1a965-e60e-431b-a0ac-f73d5c25a7da" />
 
-(Add screenshot or GIF here)
 
 📌 Future Improvements
 Add progress bar for file processing
