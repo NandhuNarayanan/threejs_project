@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📦 3D Log Visualizer
 
-## Getting Started
+An interactive fullstack project that visualizes log file uploads using **Three.js**, processes them in the background with **BullMQ**, and stores structured data in **Supabase**. Built with **Next.js** on both the frontend and backend.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🧠 Features
+
+- 🚀 Upload large JSON log files
+- ⚙️ Background file processing using **BullMQ** and Redis
+- 🧱 3D animation using **Three.js** to represent file activity
+- 🗃️ Parsed logs are stored in **Supabase (PostgreSQL)**
+- 🔄 Real-time feedback via animation (e.g., cube splitting)
+- 🧵 Stream-based file handling for efficient memory usage
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: [Next.js](https://nextjs.org/), [Three.js](https://threejs.org/)
+- **Backend**: Next.js API Routes
+- **Queue**: [BullMQ](https://docs.bullmq.io/) + [Redis](https://redis.io/)
+- **Database**: [Supabase](https://supabase.com/) (PostgreSQL)
+- **Streaming**: Busboy for handling large files efficiently
+
+---
+
+## 🧩 Folder Structure
+
+.
+upload_logs/
+├── src/
+│ ├── app/
+│ │ ├── api/
+│ │ │ ├── log-stats/ # (route for fetching stats)
+│ │ │  └── route.ts
+│ │ │ └── upload/ # (API route for file uploads)
+│ │ │  └── route.ts
+│ │ ├── logs/ # (Log-list UI pages
+│ │ ├── page.tsx # (Main page)
+│ │ ├── layout.tsx
+│ │ └── globals.css
+│ ├── components/ # (React components)
+│ │ ├── FileUpload.tsx
+│ │ ├── FileUploader.tsx
+│ │ ├── SideBar.tsx
+│ │ ├── Three.tsx # (Main 3D scene)
+│ │ └── ThreeDLoader.tsx (Loader)
+│ ├── lib/ # (Utilities and configs)
+│ │ ├── addJob.ts # (Add BullMQ jobs)
+│ │ ├── queue.ts # (Queue config)
+│ │ ├── redis.ts # (Redis connection)
+│ │ └── supabase.ts # (Supabase client setup)
+│ └── worker/ # (Background workers)
+│ ├── jobHandler.js # (Job logic for processing JSON files)
+│ └── worker.js # (BullMQ Worker instance)
+
+
+---
+
+## 🚚 How It Works
+
+1. **User uploads a JSON file** from the frontend.
+2. The file is streamed and saved using Busboy inside a Next.js API route.
+3. A **BullMQ job** is added to the queue with the file path.
+4. A **worker** reads the file line-by-line, parses JSON, and inserts data into Supabase.
+5. As the job starts, a **Three.js cube splits**, representing that processing has begun.
+
+---
+
+## 🧪 Local Setup
+
+### 1. Clone the repo
+
 ```
+git clone https://github.com/your-username/3d-log-visualizer.git
+cd upload_logs
+2. Install dependencies
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+npm install
+3. Setup environment variables
+Create a .env.local file in the root:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+env
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+REDIS_URL=redis://localhost:6379
+4. Start services
+Make sure Redis is running:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+redis-server
+Then start the dev server and worker:
 
-## Learn More
+# In one terminal
+npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# In another terminal
+node worker/worker.ts
+📸 Demo Preview
+When the user uploads a file, a 3D cube splits and animates to show that the system is working in the background.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+(Add screenshot or GIF here)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📌 Future Improvements
+Add progress bar for file processing
 
-## Deploy on Vercel
+Support compressed log files (e.g. .gz)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Enable real-time log status updates using Supabase Realtime or WebSockets
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🧑‍💻 Author
+Nandhu Narayanan
