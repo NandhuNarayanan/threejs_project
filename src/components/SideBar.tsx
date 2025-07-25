@@ -19,7 +19,7 @@ export default function Sidebar() {
         <div className="flex flex-col items-center">
           <img
             src="https://placehold.co/40x40/E9A9B4/FFFFFF?text=UPLOAD"
-            alt="Suburbia Skate Logo"
+            alt="Upload Data Logo"
             className="w-10 h-10 rounded-full mb-1"
           />
         </div>
