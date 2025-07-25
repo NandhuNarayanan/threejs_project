@@ -26,12 +26,10 @@ export default function ThreeDLoader({
     const particles: THREE.Points[] = [];
 
     function init() {
-      // Scene setup
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
       camera.position.z = 6;
 
-      // Renderer setup with enhanced settings
       renderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: true,
@@ -46,12 +44,11 @@ export default function ThreeDLoader({
         containerRef.current.appendChild(renderer.domElement);
       }
 
-      // Create main rotating cubes with gradient materials
       const geometry = new THREE.BoxGeometry(0.4, 0.4, 0.4);
       geometry.computeBoundingBox();
 
       for (let i = 0; i < 12; i++) {
-        // Create gradient material for each cube
+
         const canvas = document.createElement("canvas");
         canvas.width = 64;
         canvas.height = 64;
@@ -93,7 +90,6 @@ export default function ThreeDLoader({
         cubes.push(cube);
       }
 
-      // Add particle system for extra visual flair
       const particleGeometry = new THREE.BufferGeometry();
       const particleCount = 50;
       const positions = new Float32Array(particleCount * 3);
@@ -122,7 +118,6 @@ export default function ThreeDLoader({
       scene.add(particleSystem);
       particles.push(particleSystem);
 
-      // Enhanced lighting setup
       const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
       scene.add(ambientLight);
 
@@ -156,7 +151,6 @@ export default function ThreeDLoader({
       animationId = requestAnimationFrame(animate);
       const time = Date.now() * 0.003;
 
-      // Enhanced cube animations
       cubes.forEach((cube, index) => {
         // Smooth rotation
         cube.rotation.x = time * 0.8 + index * 0.2;

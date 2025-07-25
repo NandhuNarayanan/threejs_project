@@ -28,13 +28,13 @@ export default function Sidebar() {
         <div className="hidden md:flex space-x-8 text-md font-semibold">
           <a
             href="/"
-            className="hover:text-[#965863] text-[#6B4E5D] transition-colors"
+            className="hover:text-[#b0e0e6] text-[#faf0e6] transition-colors"
           >
             Upload
           </a>
           <a
             href="/logs"
-            className="hover:text-[#965863] text-[#6B4E5D] transition-colors"
+            className="hover:text-[#b0e0e6] text-[#faf0e6] transition-colors"
           >
             Logs
           </a>

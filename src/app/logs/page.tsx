@@ -27,11 +27,11 @@ export default function UploadedFiles() {
   const totalPages = Math.ceil(totalCount / limit);
 
   return (
-    <div className="min-h-screen bg-[#F8E3E7] relative">
+    <div className="min-h-screen bg-gradient-to-t from-[#4b4b4b] to-[#32769D] relative">
       <Sidebar />
 
-      <div className="p-2 max-w-7xl mx-auto text-[#6B4E5D]">
-        <h2 className="text-2xl font-bold mb-6">Uploaded Files</h2>
+      <div className="p-2 max-w-7xl mx-auto text-[#32769D]">
+        <h2 className="text-2xl font-bold mb-6 text-[#faf0e6]">Uploaded Files</h2>
 
         {loading ? (
           <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
@@ -104,7 +104,7 @@ export default function UploadedFiles() {
               >
                 Previous
               </button>
-              <span className="font-medium">
+              <span className="font-medium text-[#faf0e6]">
                 Page {page} of {totalPages}
               </span>
               <button
@@ -119,7 +119,7 @@ export default function UploadedFiles() {
         )}
 
         {/* Show small loader during pagination */}
-        {loading && logs.length > 0 && (
+        {/* {loading && logs.length > 0 && (
           <div className="fixed top-4 right-4 bg-white rounded-lg shadow-lg p-4 border">
             <div className="flex items-center space-x-3">
               <ThreeDLoader
@@ -132,7 +132,7 @@ export default function UploadedFiles() {
               </span>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

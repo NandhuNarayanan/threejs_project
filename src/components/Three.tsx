@@ -51,13 +51,30 @@ export default function SpheresScene({
       camera.position.z = 5;
 
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xf8e3e7); // soft background
+
+  // Create black gradient background using canvas
+const canvas = document.createElement("canvas");
+canvas.width = 1;
+canvas.height = 512;
+
+const ctx = canvas.getContext("2d")!;
+const gradient = ctx.createLinearGradient(0, 512, 0, 0);
+
+gradient.addColorStop(0, "#242124"); 
+gradient.addColorStop(1, "#003366"); 
+
+ctx.fillStyle = gradient;
+ctx.fillRect(0, 0, 1, 512);
+
+const texture = new THREE.CanvasTexture(canvas);
+scene.background = texture;
+
 
       // 🌟 Glowing, shiny material
       const geometry = new THREE.SphereGeometry(0.15, 32, 32);
       const material = new THREE.MeshPhysicalMaterial({
-        color: 0xf8e3e7,
-        emissive: 0xf8e3e7,
+        color: 0x0b2bb5,
+        emissive: 0x4c1d95,
         emissiveIntensity: 0.6,
         roughness: 0.15,
         metalness: 0.7,

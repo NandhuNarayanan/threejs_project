@@ -54,7 +54,7 @@ export default function FileUpload({
     <div className="mt-4 md:mt-8 lg:mt-8 flex flex-col items-center space-y-6">
       <div
         className={`w-80 h-20 border-4 border-dashed rounded-2xl flex items-center justify-center text-center px-2 cursor-pointer transition-all ${
-          dragging ? "border-pink-400 bg-pink-100" : "border-[#8E5D72] bg-white"
+          dragging ? "border-pink-400 bg-transparent" : "border-[#faf0e6] bg-transparent"
         }`}
         onDragOver={(e) => {
           e.preventDefault();
@@ -64,7 +64,7 @@ export default function FileUpload({
         onDrop={handleDrop}
         onClick={() => inputRef.current?.click()}
       >
-        <span className="text-[#8E5D72] font-medium text-lg">
+        <span className="text-[#faf0e6] font-medium text-lg">
           {dragging
             ? "Drop the file here"
             : selectedFile

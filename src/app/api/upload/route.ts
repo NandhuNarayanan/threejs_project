@@ -4,6 +4,7 @@ import { mkdir } from "fs/promises";
 import { createWriteStream } from "fs";
 import Busboy from "busboy";
 import { queue } from "@/lib/queue";
+import { addLogProcessingJob } from "@/lib/addJob";
 
 export const runtime = "nodejs";
 
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
 
       stream.on("close", async () => {
         console.log( `File saved to: ${filePath}`);
-        (await queue.add("log-processing", { filePath}))
+        (await  addLogProcessingJob(filePath))
         resolve(
           new Response(
             JSON.stringify({ message: "File uploaded and job queued." }),
