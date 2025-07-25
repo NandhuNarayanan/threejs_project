@@ -46,6 +46,7 @@ export default function FileUpload({
 
     setUploading(false);
     setUploadStatus("done");
+    setSelectedFile(null);
     setSuccess(res.ok);
   };
 
