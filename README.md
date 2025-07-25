@@ -73,8 +73,9 @@ upload_logs/
 ### 1. Clone the repo
 
 ```
-git clone https://github.com/your-username/3d-log-visualizer.git
+git clone [https://github.com/your-username/3d-log-visualizer.git](https://github.com/NandhuNarayanan/threejs_project.git)
 cd upload_logs
+
 2. Install dependencies
 
 npm install
